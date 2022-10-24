@@ -1,24 +1,47 @@
 import React from 'react';
+import { Route, Routes } from "react-router-dom";
+import axios from 'axios';
 import SearchForm from './SearchForm';
 import Navigation from './Navigation';
 import apiKey from '../config.js';
-import {
-  BrowserRouter, 
-  Route
-} from 'react-router-dom';
 
+
+
+
+
+//still need to adjust it to react, see video
+/* componentDidMount() {
+    // Make a request for a user with a given ID
+  axios.get('/user?ID=12345')
+  .then(function (response) {
+    // handle success
+    console.log(response);
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  })
+  .then(function () {
+    // always executed
+  });
+} */
 
 
 
 const App  = () => {
 
+  //const handleInput = event => {
+  //  setSearchTerm(event.target.value)
+  //};
+
+
   return (
-    <BrowserRouter>
     <div className='container'>
-      <Route path="/" component={SearchForm} />
-      <Route path="/" component={Navigation} />
+      <Routes>
+          <Route path="/" element={<SearchForm />} />
+          <Route path="/" element={<Navigation />} />
+      </Routes>
     </div>
-    </BrowserRouter>
   );
 
 }
