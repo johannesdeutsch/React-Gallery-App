@@ -12,53 +12,45 @@ import Computers from './Computers';
 
 
 
-
-
-//still need to adjust it to react, see video
-/* componentDidMount() {
-    // Make a request for a user with a given ID
-  axios.get('/user?ID=12345')
-  .then(function (response) {
-    // handle success
-    console.log(response);
-  })
-  .catch(function (error) {
-    // handle error
-    console.log(error);
-  })
-  .then(function () {
-    // always executed
-  });
-} */
-
-
-
 const App  = (props) => {
+
+  const api = apiKey;
 
   //const handleInput = event => {
   //setSearchTerm(event.target.value)
   //};
+  //still need to adjust it to react, see video
+  function componentDidMount() {
+    // Make a request for a user with a given ID
+    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${api}&tags=${value}&page=24&format=json&nojsoncallback=1`)
+    .then(response => {
+      this.setState({
+        photos: response.data.photos.photo
+      });
+    })
+    .catch(error => {
+      // handle error
+      console.log('Error fetching and parsing data', error);
+    });
+  }
 
 
   return (
     <div className='container'>
-      <Routes>
-        <Route path="/" element={<SearchForm searchInput={props.searchInput} />} />
-        <Route path="/" element={<Navigation />}>
+      <SearchForm setValue={props} />
+      <Navigation />
+        <Routes>
           <Route path="cats" element={<Cats />} />
           <Route path="dogs" element={<Dogs />} />
           <Route path="computers" element={<Computers />} />
-        </Route>
-        <Route path="/" element={<PhotoContainer /*photos={photos}}*//>} />
-      </Routes>
+        </Routes>
+      <PhotoContainer photos={photos} />
     </div>
   );
 
-}
+};
 
 
-const api = apiKey;
+
 
 export default App;
-
-
