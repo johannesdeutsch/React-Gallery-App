@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Route, Routes } from "react-router-dom";
 import axios from 'axios';
 import SearchForm from './SearchForm';
@@ -16,35 +16,39 @@ const App  = (props) => {
 
   const api = apiKey;
 
-  //const handleInput = event => {
-  //setSearchTerm(event.target.value)
-  //};
-  //still need to adjust it to react, see video
-  function componentDidMount() {
+  
+
+
+
+  const [ searchInput, setPhoto] = useState([
+  
+    function componentDidMount() {
     // Make a request for a user with a given ID
-    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${api}&tags=${value}&page=24&format=json&nojsoncallback=1`)
-    .then(response => {
-      this.setState({
-        photos: response.data.photos.photo
+      axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${api}&tags=${searchInput}&page=24&format=json&nojsoncallback=1`)
+      .then(response => {
+        setPhoto(response.data);
+      })
+      .catch(error => {
+        // handle error
+        console.log('Error fetching and parsing data', error);
       });
-    })
-    .catch(error => {
-      // handle error
-      console.log('Error fetching and parsing data', error);
-    });
-  }
+    }
+ ]);
+  
+ 
+
 
 
   return (
     <div className='container'>
-      <SearchForm setValue={props} />
+      <SearchForm onSearch={componentDidMount} />
       <Navigation />
         <Routes>
           <Route path="cats" element={<Cats />} />
           <Route path="dogs" element={<Dogs />} />
           <Route path="computers" element={<Computers />} />
         </Routes>
-      <PhotoContainer photos={photos} />
+      <PhotoContainer />
     </div>
   );
 
