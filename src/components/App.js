@@ -13,7 +13,7 @@ import Computers from './Computers';
 
 
 const App  = (props) => {
-  const [ searchInput, setPhoto] = useState();
+  const [ searchInput, setPhoto] = useState(null);
   const api = apiKey;
 
   
@@ -23,13 +23,13 @@ const App  = (props) => {
       // Make a request for a user with a given ID
       axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${api}&tags=${searchInput}&page=24&format=json&nojsoncallback=1`)
       .then(response => {
-        setPhoto(response.data);
+        setPhoto(response.photos);
       })
       .catch(error => {
         // handle error
         console.log('Error fetching and parsing data', error);
       });
-  })
+  });
 
 
   
