@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, Routes } from "react-router-dom";
 import axios from 'axios';
 import SearchForm from './SearchForm';
@@ -13,17 +13,14 @@ import Computers from './Computers';
 
 
 const App  = (props) => {
-
+  const [ searchInput, setPhoto] = useState();
   const api = apiKey;
 
   
+  useEffect(() => {
 
-
-
-  const [ searchInput, setPhoto] = useState([
-  
-    function componentDidMount() {
-    // Make a request for a user with a given ID
+    
+      // Make a request for a user with a given ID
       axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${api}&tags=${searchInput}&page=24&format=json&nojsoncallback=1`)
       .then(response => {
         setPhoto(response.data);
@@ -32,8 +29,10 @@ const App  = (props) => {
         // handle error
         console.log('Error fetching and parsing data', error);
       });
-    }
- ]);
+  })
+
+
+  
   
  
 
@@ -41,7 +40,7 @@ const App  = (props) => {
 
   return (
     <div className='container'>
-      <SearchForm onSearch={componentDidMount} />
+      <SearchForm onSearch={useEffect()} />
       <Navigation />
         <Routes>
           <Route path="cats" element={<Cats />} />
