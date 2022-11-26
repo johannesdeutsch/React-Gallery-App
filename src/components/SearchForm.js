@@ -2,14 +2,13 @@ import React, { useState } from 'react';
 
 const SearchForm = (props) => {
     React.useState(0);
-    //const [ searchTerm, setSearchTerm ] = React.useState('');
+    //const [ dat, setSearchTerm ] = React.useState('');
 
     //this is a slightly changed variant from https://dev.to/asimdahall/simple-search-form-in-react-using-hooks-42pg
     const [value, setValue] = useState("");
 
     const handleSearch = (event) => {
         event.preventDefault();
-        props.onSearch(value);
         props.addSearchInput(value);
     }
     
