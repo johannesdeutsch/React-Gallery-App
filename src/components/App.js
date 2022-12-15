@@ -13,43 +13,49 @@ import Computers from './Computers'; */
 
 
 const App  = (props) => {
-  const [ data, setPhoto] = useState(null);
-  const [ searchInput, addSearchInput ] = useState(null);
+  const [ pictures, setPhoto ] = useState([]);
+  const [ searchInput, addSearchInput ] = useState("");
   const api = apiKey;
 
   
   useEffect(() => {
-
+    let activeFetch = true;
     // Make a request for a user with a given ID
+    
+    
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${api}&tags=${searchInput}&per_page=24&format=json&nojsoncallback=1`)
     .then(response => {
-      console.log(response);
-      setPhoto(response.data);
+       console.log(response);
+      if (activeFetch) {
+      setPhoto(response.data.photos.photo);
+      }
     })
     .catch(error => {
       // handle error
       console.log('Error fetching and parsing data', error);
     });
-  }, []);
+    
+    return () => {activeFetch = false}
+  }, [searchInput]);
 
-  const handleAddSearchInput = () => {
-    addSearchInput(searchInput => searchInput + addSearchInput);
-  }
+  const handleAddSearchInput = value => {
+    addSearchInput(value);
+  };
 
-  const handleFetchResult = () => {
-    setPhoto(data => data + setPhoto);
-  }
+  /* const handleFetchResult = pictures => {
+    setPhoto(data.photos);
+  }; */
 
   return (
     <div className='container'>
-      <SearchForm addSearchInput={handleAddSearchInput} />
+      <SearchForm changeSearchInput={handleAddSearchInput} />
       <Navigation />
          {/*<Routes>
           <Route path="cats" element={<Cats />} />
           <Route path="dogs" element={<Dogs />} />
           <Route path="computers" element={<Computers />} />
         </Routes> */}
-      <PhotoContainer data={handleFetchResult} searchInput={searchInput}/>
+      <PhotoContainer data={pictures} searchInput={searchInput}/>
     </div>
   );
 };
