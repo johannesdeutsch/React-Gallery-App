@@ -1,9 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Photo from './Photo';
 import NotFound from './NotFound';
-
-
 
 
 const Cats = (props) => {
