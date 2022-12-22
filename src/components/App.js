@@ -43,19 +43,6 @@ const App  = (props) => {
   const handleAddSearchInput = value => {
     addSearchInput(value);
   };
-
-  const handleCatSearch = cats => {
-    addSearchInput(cats);
-  }
-
-  const handleDogSearch = dogs => {
-    addSearchInput(dogs);
-  }
-
-  const handleComputerSearch = computers => {
-    addSearchInput(computers);
-  }
-
   
 
   return (
@@ -63,19 +50,15 @@ const App  = (props) => {
       <SearchForm changeSearchInput={handleAddSearchInput} />
       <Navigation />
         <Routes>
-          <Route path="cats" element={<Cats searchInput={searchInput} changeSearchInput={handleCatSearch}/>} />
-          <Route path="dogs" element={<Dogs searchInput={searchInput} changeSearchInput={handleDogSearch}/>} />
-          <Route path="computers" element={<Computers searchInput={searchInput} changeSearchInput={handleComputerSearch}/>} />
+          <Route path="cats" element={<Cats searchInput={searchInput} changeCatsSearch={handleAddSearchInput} data={pictures}/>} />
+          <Route path="dogs" element={<Dogs searchInput={searchInput} changeDogsSearch={handleAddSearchInput} data={pictures}/>} />
+          <Route path="computers" element={<Computers searchInput={searchInput} changeComputersSearch={handleAddSearchInput} data={pictures}/>} />
         </Routes>
       <PhotoContainer data={pictures} searchInput={searchInput}/>
     </div>
   );
-};
 
-App.propTypes = {
-  searchInput: PropTypes.string,
-  changeSearchInput: PropTypes.string
+  
 };
-
 
 export default App;

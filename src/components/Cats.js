@@ -9,8 +9,6 @@ import NotFound from './NotFound';
 const Cats = (props) => {
     const results = props.data;
 
-    console.log('props.data', props.data);
-
     return (
         <div className="photo-container">
         <h2>{props.searchInput? `Results for ${props.searchInput}` : ' ' }</h2>
@@ -31,8 +29,5 @@ const Cats = (props) => {
     )
 }
 
-Cats.propTypes = {
-    data: PropTypes.string
-}
 
 export default Cats;

@@ -6,7 +6,6 @@ import NotFound from './NotFound';
 const Dogs = (props) => {
     const results = props.data;
 
-    console.log('props.data', props.data);
 
     return (
         <div className="photo-container">

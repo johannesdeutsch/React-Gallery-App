@@ -6,7 +6,7 @@ import NotFound from './NotFound';
 const Computers = (props) => {
     const results = props.data;
 
-    console.log('props.data', props.data);
+
 
     return (
         <div className="photo-container">

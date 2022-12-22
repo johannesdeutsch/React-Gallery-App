@@ -11,24 +11,23 @@ const Navigation = (props) => {
 
   const handleCatsButton = (event) => {
     event.preventDefault();
-    props.changeSearchInput(cats.current.name);
+    props.changeCatsSearch(cats.current.value);
   }
 
   const handleDogsButton = (event) => {
     event.preventDefault();
-    props.changeSearchInput(dogs.current.name);
+    props.changeDogsSearch(dogs.current.value);
   }
 
   const handleComputersButton = (event) => {
     event.preventDefault();
-    props.changeSearchInput(computers.current.name);
+    props.changeComputersSearch(computers.current.value);
   }
-
+  
   
 
     return (
       <nav className="main-nav">
-       {console.log(cats)}
         <ul>
           <li><NavLink to='cats' ref={cats} onSubmit = {(event) => handleCatsButton(event)}>Cats</NavLink></li>
           <li><NavLink to='dogs' ref={dogs} onSubmit = {(event) => handleDogsButton(event)}>Dogs</NavLink></li>
@@ -40,9 +39,6 @@ const Navigation = (props) => {
 
 }
 
-Navigation.propTypes = {
-  changeSearchInput: PropTypes.string
-};
 
 
 export default Navigation;
