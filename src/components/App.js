@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { Route, Routes } from "react-router-dom";
 import axios from 'axios';
 import SearchForm from './SearchForm';
@@ -50,9 +49,9 @@ const App  = (props) => {
       <SearchForm changeSearchInput={handleAddSearchInput} />
       <Navigation />
         <Routes>
-          <Route path="cats" element={<Cats searchInput={searchInput} changeCatsSearch={handleAddSearchInput} data={pictures}/>} />
-          <Route path="dogs" element={<Dogs searchInput={searchInput} changeDogsSearch={handleAddSearchInput} data={pictures}/>} />
-          <Route path="computers" element={<Computers searchInput={searchInput} changeComputersSearch={handleAddSearchInput} data={pictures}/>} />
+          <Route path="cats" element={<Cats searchInput={searchInput} changeSearch={handleAddSearchInput} data={pictures}/>} />
+          <Route path="dogs" element={<Dogs searchInput={searchInput} changeSearch={handleAddSearchInput} data={pictures}/>} />
+          <Route path="computers" element={<Computers searchInput={searchInput} changeSearch={handleAddSearchInput} data={pictures}/>} />
         </Routes>
       <PhotoContainer data={pictures} searchInput={searchInput}/>
     </div>

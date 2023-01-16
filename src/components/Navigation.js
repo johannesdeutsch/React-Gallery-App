@@ -3,38 +3,27 @@ import { Outlet, NavLink } from 'react-router-dom';
 
 
 
-const Navigation = (props) => {
-  const cats = useRef();
-  const dogs = useRef();
-  const computers = useRef();
+const Navigation = ({changeSearch}) => {
+  const buttonClick = useRef();
 
-  const handleCatsButton = (event) => {
+  const handleClick = (event) => {
     event.preventDefault();
-    props.changeCatsSearch(cats.current.value);
-  }
-
-  const handleDogsButton = (event) => {
-    event.preventDefault();
-    props.changeDogsSearch(dogs.current.value);
-  }
-
-  const handleComputersButton = (event) => {
-    event.preventDefault();
-    props.changeComputersSearch(computers.current.value);
+    changeSearch = buttonClick.current.value;
   }
   
   
+  
 
-    return (
-      <nav className="main-nav">
-        <ul>
-          <li><NavLink to='cats' ref={cats} onSubmit = {(event) => handleCatsButton(event)}>Cats</NavLink></li>
-          <li><NavLink to='dogs' ref={dogs} onSubmit = {(event) => handleDogsButton(event)}>Dogs</NavLink></li>
-          <li><NavLink to='computers' ref={computers} onSubmit = {(event) => handleComputersButton(event)}>Computers</NavLink></li>
-        </ul>
-        <Outlet />
-      </nav>     
-    );
+  return (
+    <nav className="main-nav" onClick = {(event) => handleClick(event)}>
+      <ul>
+        <li><NavLink to='cats' value='cats' ref={buttonClick}>Cats</NavLink></li>
+        <li><NavLink to='dogs' value='dogs' ref={buttonClick}>Dogs</NavLink></li>
+        <li><NavLink to='computers' value='computers' ref={buttonClick}>Computers</NavLink></li>
+      </ul>
+      <Outlet />
+    </nav>     
+  );
 
 }
 
