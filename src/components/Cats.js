@@ -8,7 +8,7 @@ const Cats = (props) => {
 
     return (
         <div className="photo-container">
-        <h2>{props.searchInput? `Results for ${props.searchInput}` : ' ' }</h2>
+        <h2>{props.cats? `Results for ${props.cats}` : ' ' }</h2>
         <ul> 
             {results?.map(picture =>
                  <Photo 

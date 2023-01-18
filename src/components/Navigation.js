@@ -1,25 +1,16 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
 
 
 
-const Navigation = ({changeSearch}) => {
-  const buttonClick = useRef();
-
-  const handleClick = (event) => {
-    event.preventDefault();
-    changeSearch = buttonClick.current.value;
-  }
-  
-  
-  
+const Navigation = () => {
 
   return (
-    <nav className="main-nav" onClick = {(event) => handleClick(event)}>
+    <nav className="main-nav">
       <ul>
-        <li><NavLink to='cats' value='cats' ref={buttonClick}>Cats</NavLink></li>
-        <li><NavLink to='dogs' value='dogs' ref={buttonClick}>Dogs</NavLink></li>
-        <li><NavLink to='computers' value='computers' ref={buttonClick}>Computers</NavLink></li>
+        <li><NavLink to='cats'>Cats</NavLink></li>
+        <li><NavLink to='dogs'>Dogs</NavLink></li>
+        <li><NavLink to='computers'>Computers</NavLink></li>
       </ul>
       <Outlet />
     </nav>     

@@ -9,7 +9,7 @@ const Dogs = (props) => {
 
     return (
         <div className="photo-container">
-        <h2>{props.searchInput? `Results for ${props.searchInput}` : ' ' }</h2>
+        <h2>{props.dogs? `Results for ${props.dogs}` : ' ' }</h2>
         <ul> 
             {results?.map(picture =>
                  <Photo 

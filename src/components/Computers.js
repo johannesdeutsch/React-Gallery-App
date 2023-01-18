@@ -10,7 +10,7 @@ const Computers = (props) => {
 
     return (
         <div className="photo-container">
-        <h2>{props.searchInput? `Results for ${props.searchInput}` : ' ' }</h2>
+        <h2>{props.computers? `Results for ${props.computers}` : ' ' }</h2>
         <ul> 
             {results?.map(picture =>
                  <Photo 
