@@ -6,12 +6,6 @@ import Navigation from './Navigation';
 import PhotoContainer from './PhotoContainer';
 import apiKey from '../config.js';
 
-import Cats from './Cats';
-import Dogs from './Dogs';
-import Computers from './Computers';
-
-
-
 
 
 const App  = (props) => {
@@ -31,16 +25,16 @@ const App  = (props) => {
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${api}&tags="${searchInput}"&per_page=24&format=json&nojsoncallback=1`)
     .then(response => {
       console.log(response);
-      if (activeFetch) {
-      setPhoto(response.data.photos.photo);
-      } else if(activeFetch && searchInput === 'cats') {
+      if (activeFetch && searchInput === 'cats') {
         setCats(response.data.photos.photo);
       } else if (activeFetch && searchInput === 'dogs') {
         setDogs(response.data.photos.photo);
       } else if (activeFetch && searchInput === 'computers') {
         setComputers(response.data.photos.photo);
+      } else if (activeFetch) {
+        setPhoto(response.data.photos.photo);
       }
-    })
+      })
     .catch(error => {
       console.log('Error fetching and parsing data', error);
     });
@@ -64,13 +58,10 @@ const App  = (props) => {
   return (
     <div className='container'>
       <SearchForm changeSearchInput={handleAddSearchInput} />
-      <Navigation changeSearch={handleAddSearchInput}/>
+      <Navigation />
         <Routes>
-          <Route path="cats" element={<Cats cats={cats} data={pictures}/>} />
-          <Route path="dogs" element={<Dogs dogs={dogs} data={pictures}/>} />
-          <Route path="computers" element={<Computers computers={computers} data={pictures}/>} />
+          <Route path="/{searchInput}" element={<PhotoContainer data={[pictures, cats, dogs, computers]} searchInput={searchInput}/> } />
         </Routes>
-      <PhotoContainer data={pictures} searchInput={searchInput}/>
     </div>
   );
 

@@ -4,7 +4,11 @@ import NotFound from './NotFound';
 
 
 const PhotoContainer = (props) => {
-    const results = props.data;
+    const resultsPictures = props.data[0];
+    const resultsCats = props.data[1];
+    const resultsDogs = props.data[2];
+    const resultsComputers = props.data[3];
+
 
 
 
@@ -12,17 +16,32 @@ const PhotoContainer = (props) => {
         <div className="photo-container">
         <h2>{props.searchInput? `Results for ${props.searchInput}` : ' ' }</h2>
         <ul> 
-            {results.map(picture =>
+            {resultsPictures?resultsPictures.map(picture =>
                  <Photo 
                     url={`https://live.staticflickr.com/${picture.server}/${picture.id}_${picture.secret}.jpg`}
                     key={picture.id}
                 /> 
-
-                //: <NotFound />
-                
+            )
+            :resultsCats?resultsCats.map(cat =>
+                 <Photo 
+                    url={`https://live.staticflickr.com/${cat.server}/${cat.id}_${cat.secret}.jpg`}
+                    key={cat.id}
+                />    
+            )
+            :resultsDogs?resultsDogs.map(dog =>
+                 <Photo 
+                    url={`https://live.staticflickr.com/${dog.server}/${dog.id}_${dog.secret}.jpg`}
+                    key={dog.id}
+                /> 
+            )
+            :resultsComputers?resultsComputers.map(computer =>
+                 <Photo 
+                    url={`https://live.staticflickr.com/${computer.server}/${computer.id}_${computer.secret}.jpg`}
+                    key={computer.id}
+                />   
             )}
-
-            {/* if statement: if there are no results <NotFound /> */}
+                    //: <NotFound />
+            /* if statement: if there are no results <NotFound /> */
         </ul>
         </div>
     )
