@@ -47,7 +47,7 @@ const App  = (props) => {
     performSearch('dogs');
     performSearch('computers');
     performSearch(searchInput);
-  }, []);
+  }, [searchInput]);
 
   const handleAddSearchInput = value => {
     addSearchInput(value);
@@ -60,7 +60,7 @@ const App  = (props) => {
       <SearchForm changeSearchInput={handleAddSearchInput} />
       <Navigation />
         <Routes>
-          <Route path="/{searchInput}" element={<PhotoContainer data={[pictures, cats, dogs, computers]} searchInput={searchInput}/> } />
+          <Route path="/:searchInput" element={<PhotoContainer data={[pictures, cats, dogs, computers]} searchInput={searchInput}/> } />
         </Routes>
     </div>
   );

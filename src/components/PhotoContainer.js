@@ -34,14 +34,14 @@ const PhotoContainer = (props) => {
                     key={dog.id}
                 /> 
             )
-            :resultsComputers?resultsComputers.map(computer =>
+            :resultsComputers.map(computer =>
                  <Photo 
                     url={`https://live.staticflickr.com/${computer.server}/${computer.id}_${computer.secret}.jpg`}
                     key={computer.id}
                 />   
-            )}
-                    //: <NotFound />
-            /* if statement: if there are no results <NotFound /> */
+            )};
+                    {//: <NotFound />
+            /* if statement: if there are no results <NotFound /> */}
         </ul>
         </div>
     )
