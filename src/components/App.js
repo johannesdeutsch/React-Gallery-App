@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import axios from 'axios';
 import SearchForm from './SearchForm';
 import Navigation from './Navigation';
 import PhotoContainer from './PhotoContainer';
+import NotFound from './NotFound.js';
 import apiKey from '../config.js';
 
 
@@ -12,6 +13,8 @@ const App  = (props) => {
   const [ pictures, setPhoto ] = useState([]);
   const [ searchInput, addSearchInput ] = useState("");
   const api = apiKey;
+
+  console.log(pictures);
 
   const [cats, setCats] = useState([]);
   const [dogs, setDogs] = useState([]);
@@ -60,7 +63,12 @@ const App  = (props) => {
       <SearchForm changeSearchInput={handleAddSearchInput} />
       <Navigation />
         <Routes>
-          <Route path="/:searchInput" element={<PhotoContainer data={[pictures, cats, dogs, computers]} searchInput={searchInput}/> } />
+          <Route path="/" element={<PhotoContainer dataPictures={pictures} searchInput={searchInput}/> } />
+          <Route path="/cats" element={<PhotoContainer dataCats={cats} searchInput={searchInput}/>} />
+          <Route path="/dogs" element={<PhotoContainer dataDogs={dogs} searchInput={searchInput}/>} />
+          <Route path="/computers" element={<PhotoContainer dataComputers={computers} searchInput={searchInput}/>} />
+          <Route path="/404" element={<NotFound />} />
+          <Route path="*" element={<Navigate to="404" replace/>} />
         </Routes>
     </div>
   );

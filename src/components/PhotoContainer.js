@@ -4,10 +4,10 @@ import NotFound from './NotFound';
 
 
 const PhotoContainer = (props) => {
-    const resultsPictures = props.data[0];
-    const resultsCats = props.data[1];
-    const resultsDogs = props.data[2];
-    const resultsComputers = props.data[3];
+    const resultsPictures = props.dataPictures;
+    const resultsCats = props.dataCats;
+    const resultsDogs = props.dataDogs;
+    const resultsComputers = props.dataComputers;
 
 
 
@@ -17,7 +17,7 @@ const PhotoContainer = (props) => {
         <h2>{props.searchInput? `Results for ${props.searchInput}` : ' ' }</h2>
         <ul> 
             {resultsPictures?resultsPictures.map(picture =>
-                 <Photo 
+                <Photo 
                     url={`https://live.staticflickr.com/${picture.server}/${picture.id}_${picture.secret}.jpg`}
                     key={picture.id}
                 /> 
@@ -39,9 +39,8 @@ const PhotoContainer = (props) => {
                     url={`https://live.staticflickr.com/${computer.server}/${computer.id}_${computer.secret}.jpg`}
                     key={computer.id}
                 />   
-            )};
-                    {//: <NotFound />
-            /* if statement: if there are no results <NotFound /> */}
+            )
+            }
         </ul>
         </div>
     )
