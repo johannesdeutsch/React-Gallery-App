@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes, Navigate, useParams } from "react-router-dom";
 import axios from 'axios';
 import SearchForm from './SearchForm';
 import Navigation from './Navigation';
@@ -10,9 +10,15 @@ import apiKey from '../config.js';
 
 
 const App  = (props) => {
+  
+  
   const [ pictures, setPhoto ] = useState([]);
   const [ searchInput, addSearchInput ] = useState("");
   const api = apiKey;
+
+  let params  = useParams();
+  console.log(params);
+  
 
   console.log(pictures);
 
@@ -56,7 +62,7 @@ const App  = (props) => {
     addSearchInput(value);
   };
   
-  
+ 
 
   return (
     <div className='container'>
@@ -64,6 +70,7 @@ const App  = (props) => {
       <Navigation />
         <Routes>
           <Route path="/" element={<PhotoContainer dataPictures={pictures} searchInput={searchInput}/> } />
+          <Route path="/search/:searchInput" element={<PhotoContainer dataPictures={pictures} searchInput={searchInput}/> } />
           <Route path="/cats" element={<PhotoContainer dataCats={cats} searchInput={searchInput}/>} />
           <Route path="/dogs" element={<PhotoContainer dataDogs={dogs} searchInput={searchInput}/>} />
           <Route path="/computers" element={<PhotoContainer dataComputers={computers} searchInput={searchInput}/>} />
