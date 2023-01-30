@@ -16,8 +16,8 @@ const App  = (props) => {
   const [ searchInput, addSearchInput ] = useState("");
   const api = apiKey;
 
-  let params = useParams();
-  params = searchInput;
+  let {searchInput} = useParams();
+
   
 
   console.log(pictures);
@@ -55,8 +55,8 @@ const App  = (props) => {
     performSearch('cats');
     performSearch('dogs');
     performSearch('computers');
-    performSearch();
-  }, []);
+    performSearch(searchInput);
+  }, [searchInput]);
 
   const handleAddSearchInput = value => {
     addSearchInput(value);
@@ -65,12 +65,11 @@ const App  = (props) => {
 
   return (
     <div className='container'>
-    {console.log(params)}
       <SearchForm changeSearchInput={handleAddSearchInput} />
       <Navigation />
         <Routes>
           <Route path="/" element={<PhotoContainer dataPictures={pictures} searchInput={searchInput}/> } />
-          <Route path="/search/:params" element={<PhotoContainer dataPictures={pictures} searchInput={searchInput}/> } />
+          <Route path="/search/:searchInput" element={<PhotoContainer dataPictures={pictures} searchInput={searchInput}/> } />
           <Route path="/cats" element={<PhotoContainer dataCats={cats} searchInput={searchInput}/>} />
           <Route path="/dogs" element={<PhotoContainer dataDogs={dogs} searchInput={searchInput}/>} />
           <Route path="/computers" element={<PhotoContainer dataComputers={computers} searchInput={searchInput}/>} />
