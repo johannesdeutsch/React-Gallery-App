@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const SearchForm = (props) => {
     React.useState(0);
+    const navigate = useNavigate();
     //const [ dat, setSearchTerm ] = React.useState('');
 
     //this is a slightly changed variant from https://dev.to/asimdahall/simple-search-form-in-react-using-hooks-42pg
@@ -11,6 +13,7 @@ const SearchForm = (props) => {
         event.preventDefault();
         event.currentTarget.reset();
         props.changeSearchInput(value);
+        navigate(`/search/${value}`);
     }
     
    

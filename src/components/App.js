@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Routes, Navigate, useParams } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import axios from 'axios';
 import SearchForm from './SearchForm';
 import Navigation from './Navigation';
@@ -14,38 +14,41 @@ const App  = (props) => {
   
   const [ pictures, setPhoto ] = useState([]);
   const [ searchInput, addSearchInput ] = useState("");
-  const api = apiKey;
-
-  let {searchInput} = useParams();
-
-  
+  const api = apiKey;  
 
   console.log(pictures);
 
   const [cats, setCats] = useState([]);
   const [dogs, setDogs] = useState([]);
   const [computers, setComputers] = useState([]);
+
+  const [loading, setLoading] = useState(false);
   
   function performSearch(searchInput) {
     let activeFetch = true;
     // Make a request for a user with a given ID
-    
+    setLoading(true);
     
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${api}&tags="${searchInput}"&per_page=24&format=json&nojsoncallback=1`)
     .then(response => {
       console.log(response);
       if (activeFetch && searchInput === 'cats') {
         setCats(response.data.photos.photo);
+        setLoading(false);
       } else if (activeFetch && searchInput === 'dogs') {
         setDogs(response.data.photos.photo);
+        setLoading(false);
       } else if (activeFetch && searchInput === 'computers') {
         setComputers(response.data.photos.photo);
+        setLoading(false);
       } else if (activeFetch) {
         setPhoto(response.data.photos.photo);
+        setLoading(false);
       }
       })
     .catch(error => {
       console.log('Error fetching and parsing data', error);
+      setLoading(false);
     });
 
     return () => {activeFetch = false}
@@ -76,6 +79,7 @@ const App  = (props) => {
           <Route path="/404" element={<NotFound />} />
           <Route path="*" element={<Navigate to="404" replace/>} />
         </Routes>
+         {loading ? <>Loading...</> : <></>}
     </div>
   );
 
