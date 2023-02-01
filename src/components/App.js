@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes, Navigate, useLocation } from "react-router-dom";
 import axios from 'axios';
 import SearchForm from './SearchForm';
 import Navigation from './Navigation';
@@ -23,6 +23,8 @@ const App  = (props) => {
   const [computers, setComputers] = useState([]);
 
   const [loading, setLoading] = useState(false);
+  const location = useLocation();
+  
   
   function performSearch(searchInput) {
     let activeFetch = true;
@@ -45,7 +47,7 @@ const App  = (props) => {
         setPhoto(response.data.photos.photo);
         setLoading(false);
       }
-      })
+    })
     .catch(error => {
       console.log('Error fetching and parsing data', error);
       setLoading(false);
@@ -54,17 +56,39 @@ const App  = (props) => {
     return () => {activeFetch = false}
   }
   
+  
+
   useEffect(() => {
     performSearch('cats');
     performSearch('dogs');
     performSearch('computers');
     performSearch(searchInput);
+      
+    window.addEventListener("popstate", () => {
+      if (window.location.pathname === '/search/:searchInput') {
+        performSearch(searchInput) 
+      } else if (window.location.pathname === '/cats') {
+        performSearch('cats');
+      } else if (window.location.pathname === '/dogs') {
+        performSearch('dogs');
+      } else if (window.location.pathname === '/computers') {
+        performSearch('computers');
+      }
+    });
+    
   }, [searchInput]);
 
   const handleAddSearchInput = value => {
     addSearchInput(value);
   };
   
+  
+    
+  
+  
+  
+
+
 
   return (
     <div className='container'>
