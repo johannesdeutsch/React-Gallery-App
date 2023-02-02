@@ -1,6 +1,6 @@
 import React from 'react';
 
-
+//component for every single photo
 const Photo = (props) => {
     return (
      <li>

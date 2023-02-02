@@ -2,7 +2,7 @@ import React from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
 
 
-
+//the React Router v6 links for the navigation
 const Navigation = () => {
 
   return (

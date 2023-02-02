@@ -1,3 +1,6 @@
+# React Gallery App
+This is the 7th project of the Treehouse Techdegree for a JavaScript Fullstack Developer. It is an app, that fetches photos from the Flickr API after a search request typed into a form. There's also a navigation bar included where preset requests like 'cats' and 'dogs' etc. can be taken. The photos are displayed in a grid. The React application uses React Router v6, JSX and JavaScript.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
