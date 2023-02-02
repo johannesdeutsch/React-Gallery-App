@@ -63,7 +63,7 @@ const App  = (props) => {
     performSearch('dogs');
     performSearch('computers');
     performSearch(searchInput);
-    
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchInput]);
 
 //the value from the searchInput of the SearchForm gets into the state
@@ -77,15 +77,14 @@ const App  = (props) => {
       <SearchForm changeSearchInput={handleAddSearchInput} />
       <Navigation />
         <Routes>
-          <Route path="/" element={<PhotoContainer dataPictures={pictures} searchInput={searchInput} handleAddSearchInput={handleAddSearchInput}/> } />
-          <Route path="/search/:searchInput" element={<PhotoContainer dataPictures={pictures} searchInput={searchInput} handleAddSearchInput={handleAddSearchInput}/> } />
-          <Route path="/cats" element={<PhotoContainer dataCats={cats} searchInput={searchInput} handleAddSearchInput={handleAddSearchInput}/>} />
-          <Route path="/dogs" element={<PhotoContainer dataDogs={dogs} searchInput={searchInput} handleAddSearchInput={handleAddSearchInput} /> } />
-          <Route path="/computers" element={<PhotoContainer dataComputers={computers} searchInput={searchInput} handleAddSearchInput={handleAddSearchInput} />} />
+          <Route path="/" element={<PhotoContainer dataPictures={pictures} searchInput={searchInput} handleAddSearchInput={handleAddSearchInput} loading={loading}/> } />
+          <Route path="/search/:searchInput" element={<PhotoContainer dataPictures={pictures} searchInput={searchInput} handleAddSearchInput={handleAddSearchInput} loading={loading}/> } />
+          <Route path="/cats" element={<PhotoContainer dataCats={cats} searchInput={searchInput} handleAddSearchInput={handleAddSearchInput} loading={loading}/>} />
+          <Route path="/dogs" element={<PhotoContainer dataDogs={dogs} searchInput={searchInput} handleAddSearchInput={handleAddSearchInput} loading={loading}/> } />
+          <Route path="/computers" element={<PhotoContainer dataComputers={computers} searchInput={searchInput} handleAddSearchInput={handleAddSearchInput} loading={loading}/>} />
           <Route path="/404" element={<NotFound />} />
           <Route path="*" element={<Navigate to="404" replace/>} />
         </Routes>
-         {loading ? <>Loading...</> : <></>}
     </div>
   );
 

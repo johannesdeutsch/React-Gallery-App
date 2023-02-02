@@ -19,7 +19,7 @@ const PhotoContainer = (props) => {
     useEffect(() => {
         if(props.handleAddSearchInput && searchInput !== props.searchInput) {
             props.handleAddSearchInput(searchInput);
-        }
+        } // eslint-disable-next-line react-hooks/exhaustive-deps
     },[searchInput] )
     
 
@@ -27,7 +27,10 @@ const PhotoContainer = (props) => {
     return (
         <div className="photo-container">
         <h2>{props.searchInput? `Results for ${props.searchInput}` : ' ' }</h2>
-        <ul> 
+        {props.loading?
+        <>Loading...</>
+        :
+        <ul>
             {resultsPictures&&resultsPictures.length>0?resultsPictures.map(picture =>
                 <Photo 
                     url={`https://live.staticflickr.com/${picture.server}/${picture.id}_${picture.secret}.jpg`}
@@ -56,6 +59,7 @@ const PhotoContainer = (props) => {
             )  
             }
         </ul>
+        }
         </div>
     )
 }
